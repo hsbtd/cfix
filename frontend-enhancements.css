@@ -273,6 +273,20 @@ summary:focus-visible {
   padding: 28px 18px;
 }
 
+.rolelabel {
+  min-height: 46px;
+  height: 46px;
+  display: grid;
+  align-content: center;
+  line-height: 1.05;
+}
+
+.rolelabel select {
+  min-height: 0;
+  height: 20px;
+  line-height: 1;
+}
+
 @media (max-width: 700px) {
   .homehero {
     min-height: 0;
@@ -317,6 +331,11 @@ summary:focus-visible {
 
   .schedule-card h3 {
     font-size: 17px;
+  }
+
+  .rolelabel {
+    min-height: 0;
+    height: auto;
   }
 }
 

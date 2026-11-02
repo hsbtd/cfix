@@ -1,10 +1,10 @@
-const CACHE_NAME = 'cfix-static-v1';
+const CACHE_NAME = 'cfix-static-v3';
 const APP_SHELL = [
   './',
   './index.html',
   './styles.css?v=frontend-v4',
-  './frontend-enhancements.css?v=frontend-v2',
-  './app.js?v=frontend-v9',
+  './frontend-enhancements.css?v=frontend-v3',
+  './app.js?v=frontend-v11',
   './frontend-enhancements.js?v=frontend-v2',
   './engine.js',
   './vendor/qrcode.js',

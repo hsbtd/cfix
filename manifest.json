@@ -2,7 +2,7 @@
   "name": "CFix · NSTP Building",
   "short_name": "CFix",
   "description": "Facility reporting and room availability for the NSTP Building.",
-  "start_url": "./?v=frontend-v9#dashboard",
+  "start_url": "./?v=frontend-v11#dashboard",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f9f1e5",
