@@ -23,7 +23,8 @@ assert.equal(JSON.stringify(seeded.rooms.slice(6).map(r=>r.equipment.includes('A
 const dashboardHtml=vm.runInContext('dashboard()',ctx);
 assert.match(dashboardHtml,/50\+ seats/);
 assert.match(dashboardHtml,/60\+ seats/);
-assert.doesNotMatch(dashboardHtml,/Any size|20\+ seats|35\+ seats/);
+assert.match(dashboardHtml,/Any size/);
+assert.doesNotMatch(dashboardHtml,/20\+ seats|35\+ seats/);
 for(const fn of ['dashboard','rooms','schedules','reports','activity','notifications','announcements','adminPage','analytics','logs']){const html=vm.runInContext(fn+'()',ctx);assert.ok(html.length>100,fn);assert.doesNotMatch(html,/reserv|data-reserve/i,fn)}
 vm.runInContext("detail('ACAD-1')",ctx);assert.doesNotMatch(elements['#modalBody'].innerHTML,/reserv|data-reserve/i);
 console.log('All 10 page render checks and room-detail check passed without reservation UI.');
