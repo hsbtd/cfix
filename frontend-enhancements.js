@@ -62,6 +62,69 @@
     });
   }
 
+  function enhanceRoomCards() {
+    document.querySelectorAll('.roomcard').forEach(card => {
+      const detailButton = card.querySelector('[data-detail]');
+      const roomId = detailButton?.dataset.detail;
+      const currentRoom = roomId ? room(roomId) : null;
+      if (!currentRoom) return;
+
+      card.dataset.roomId = roomId;
+      const meta = card.querySelector('.roommeta');
+      if (meta && !meta.querySelector('.room-feature')) {
+        const aircon = currentRoom.equipment.includes('Air conditioning');
+        meta.insertAdjacentHTML('beforeend', `<span class="room-feature ${aircon ? 'has-aircon' : 'no-aircon'}">${aircon ? '❄ Aircon' : '◌ No aircon'}</span>`);
+      }
+
+      card.querySelectorAll('[data-checkin]').forEach(button => {
+        button.setAttribute('aria-label', `${button.textContent.trim()} ${currentRoom.name}`);
+      });
+      card.querySelectorAll('[data-detail]').forEach(button => {
+        button.setAttribute('aria-label', `View details for ${currentRoom.name}`);
+      });
+    });
+  }
+
+  function renderMobileSchedules() {
+    if (page !== 'schedules') return;
+    const table = [...document.querySelectorAll('table')].find(candidate =>
+      candidate.querySelector('th')?.textContent.trim() === 'ROOM'
+    );
+    if (!table || table.parentElement.querySelector('.schedule-mobile-list')) return;
+
+    const rows = [...table.querySelectorAll('tbody tr')];
+    const list = document.createElement('div');
+    list.className = 'schedule-mobile-list';
+    list.innerHTML = rows.map(row => {
+      const cells = [...row.querySelectorAll('td')].map(cell => cell.textContent.trim());
+      const action = row.querySelector('button')?.outerHTML || '';
+      return `<article class="schedule-card">
+        <div class="schedule-card-top"><span class="schedule-card-room">${esc(cells[0] || 'Room')}</span><span class="schedule-card-time">${esc(cells[3] || '')}</span></div>
+        <h3>${esc(cells[1] || 'Class or activity')}</h3>
+        <p>${esc(cells[2] || 'Faculty not listed')}</p>
+        <div class="schedule-card-bottom"><span>${esc(cells[4] || '')}</span>${action}</div>
+      </article>`;
+    }).join('') || '<div class="empty">No class schedules yet.</div>';
+    table.parentElement.appendChild(list);
+  }
+
+  function enhanceFeedbackAndAccessibility() {
+    const toast = document.querySelector('#toast');
+    if (toast) toast.setAttribute('aria-live', 'polite');
+
+    document.querySelectorAll('.empty').forEach(empty => {
+      empty.setAttribute('role', 'status');
+    });
+
+    const main = document.querySelector('#main');
+    if (main) main.setAttribute('tabindex', '-1');
+  }
+
+  function registerPwa() {
+    if (typeof navigator === 'undefined' || !('serviceWorker' in navigator)) return;
+    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}), { once: true });
+  }
+
   function refreshRoomResults() {
     if (page !== 'rooms') return;
     const results = document.querySelector('#roomresults');
@@ -75,6 +138,9 @@
     baseRender();
     renderRoomFilterExtras();
     normalizeSectionBranding();
+    enhanceRoomCards();
+    renderMobileSchedules();
+    enhanceFeedbackAndAccessibility();
   };
 
   const baseDetail = detail;
@@ -115,4 +181,8 @@
 
   renderRoomFilterExtras();
   normalizeSectionBranding();
+  enhanceRoomCards();
+  renderMobileSchedules();
+  enhanceFeedbackAndAccessibility();
+  registerPwa();
 })();

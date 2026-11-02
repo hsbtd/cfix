@@ -4,11 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#590e16">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.json?v=frontend-v1">
   <title>CFix · NSTP Building</title>
   <link rel="stylesheet" href="styles.css?v=frontend-v4">
-  <link rel="stylesheet" href="frontend-enhancements.css?v=frontend-v1">
+  <link rel="stylesheet" href="frontend-enhancements.css?v=frontend-v2">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <a class="brand" href="#dashboard" aria-label="CFix home"><span class="brandmark">c<span>✦</span></span><span>CFix<small>NSTP BUILDING</small></span></a>
     <button id="menu" aria-label="Toggle navigation" aria-expanded="false">☰</button>
@@ -21,15 +25,15 @@
   </header>
   <div class="shell">
     <div class="demobar"><strong>PROTOTYPE</strong> <span>NSTP Building · Sample records · Local device only · Demo roles are not authentication</span></div>
-    <main id="main"></main>
+    <main id="main" tabindex="-1"></main>
     <footer><a class="footerbrand" href="#dashboard">CFix<span> A little care. A better campus.</span></a><span>CC102 · Tech for Good · Proposed NSTP Building solution</span></footer>
   </div>
   <dialog id="modal"><div class="dialoghead"><h2 id="modalTitle"></h2><button id="close" aria-label="Close dialog">✕</button></div><div id="modalBody"></div></dialog>
-  <div id="toast" role="status"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
   <script src="vendor/qrcode.js"></script>
   <script src="vendor/jsQR.js"></script>
   <script src="engine.js"></script>
-  <script src="app.js?v=frontend-v7"></script>
-  <script src="frontend-enhancements.js?v=frontend-v1"></script>
+  <script src="app.js?v=frontend-v9"></script>
+  <script src="frontend-enhancements.js?v=frontend-v2"></script>
 </body>
 </html>

@@ -132,3 +132,191 @@
   }
 }
 
+/* CFix polish pass */
+.skip-link {
+  position: fixed;
+  left: 18px;
+  top: 12px;
+  z-index: 100;
+  transform: translateY(-180%);
+  background: var(--ink);
+  color: #fff8eb;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform .15s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+button,
+input,
+select,
+textarea {
+  min-height: 42px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.homehero {
+  min-height: 520px;
+  padding-top: 54px;
+  padding-bottom: 58px;
+}
+
+.finder {
+  padding: 22px;
+}
+
+.finder h2 {
+  max-width: 520px;
+}
+
+.roommeta {
+  flex-wrap: wrap;
+  row-gap: 7px;
+}
+
+.room-feature {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 700;
+}
+
+.room-feature.has-aircon {
+  color: #6b7690;
+}
+
+.room-feature.no-aircon {
+  color: #a06c4d;
+}
+
+.schedule-mobile-list {
+  display: none;
+}
+
+.schedule-card {
+  background: #fffaf4;
+  border: 1px solid #e5d6c9;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 18px #590e1608;
+}
+
+.schedule-card + .schedule-card {
+  margin-top: 10px;
+}
+
+.schedule-card-top,
+.schedule-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.schedule-card-room,
+.schedule-card-time {
+  color: #8a625b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+}
+
+.schedule-card-time {
+  color: #a06c4d;
+  text-align: right;
+}
+
+.schedule-card h3 {
+  margin: 12px 0 5px;
+  font-size: 18px;
+}
+
+.schedule-card p {
+  color: #8e786d;
+  font-size: 12px;
+  margin: 0 0 14px;
+}
+
+.schedule-card-bottom {
+  border-top: 1px solid #eaded3;
+  padding-top: 11px;
+  color: #9b8273;
+  font-size: 11px;
+}
+
+.schedule-card-bottom button {
+  min-height: 34px;
+  padding: 7px 10px;
+  font-size: 10px;
+}
+
+.empty {
+  border: 1px dashed #dcc9ba;
+  border-radius: 15px;
+  background: #fffaf4;
+  padding: 28px 18px;
+}
+
+@media (max-width: 700px) {
+  .homehero {
+    min-height: 0;
+    padding-top: 34px;
+    padding-bottom: 38px;
+  }
+
+  .finder {
+    padding: 19px;
+  }
+
+  .finder h2 {
+    font-size: 25px;
+  }
+
+  .seatoptions {
+    gap: 5px;
+  }
+
+  .seatoptions span {
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .roommeta {
+    gap: 8px 12px;
+  }
+
+  body[data-page="schedules"] .panel.scroll {
+    overflow: visible;
+  }
+
+  body[data-page="schedules"] table {
+    display: none;
+  }
+
+  body[data-page="schedules"] .schedule-mobile-list {
+    display: block;
+  }
+
+  .schedule-card h3 {
+    font-size: 17px;
+  }
+}
+
