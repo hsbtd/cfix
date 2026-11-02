@@ -16,6 +16,14 @@ const el=()=>({textContent:'',innerHTML:'',style:{},value:'',open:false,addEvent
 const document={querySelector(s){return elements[s]??=el()},addEventListener(){},body:{dataset:{},classList:{toggle(){},remove(){}}}};
 const ctx={CampusEngine:E,document,localStorage:{getItem(){return null},setItem(){}},window:{addEventListener(){}},location:{hash:'',href:'http://localhost/'},setTimeout(){},clearTimeout(){},setInterval(){},crypto:require('node:crypto').webcrypto,URL,Date,console};
 vm.createContext(ctx);vm.runInContext(fs.readFileSync(__dirname+'/app.js','utf8'),ctx);
+const seeded=vm.runInContext('seed()',ctx);
+assert.equal(JSON.stringify(seeded.rooms.map(r=>r.name)),JSON.stringify(['ACAD 1','ACAD 2','ACAD 3','ACAD 4','ACAD 5','ACAD 6','ACAD 7','ACAD 8']));
+assert.equal(JSON.stringify(seeded.rooms.map(r=>r.capacity)),JSON.stringify([40,40,40,60,60,60,40,40]));
+assert.equal(JSON.stringify(seeded.rooms.slice(6).map(r=>r.equipment.includes('Air conditioning'))),JSON.stringify([false,false]));
+const dashboardHtml=vm.runInContext('dashboard()',ctx);
+assert.match(dashboardHtml,/50\+ seats/);
+assert.match(dashboardHtml,/60\+ seats/);
+assert.doesNotMatch(dashboardHtml,/Any size|20\+ seats|35\+ seats/);
 for(const fn of ['dashboard','rooms','schedules','reports','activity','notifications','announcements','adminPage','analytics','logs']){const html=vm.runInContext(fn+'()',ctx);assert.ok(html.length>100,fn);assert.doesNotMatch(html,/reserv|data-reserve/i,fn)}
-vm.runInContext("detail('NSTP-101')",ctx);assert.doesNotMatch(elements['#modalBody'].innerHTML,/reserv|data-reserve/i);
+vm.runInContext("detail('ACAD-1')",ctx);assert.doesNotMatch(elements['#modalBody'].innerHTML,/reserv|data-reserve/i);
 console.log('All 10 page render checks and room-detail check passed without reservation UI.');
